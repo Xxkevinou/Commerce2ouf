@@ -1,48 +1,246 @@
-<% if @current_cart.items.count == 0 %>
-    Your Cart is empty.
-<% else %>
-    Number of items: <%= @current_cart.items.count %>
-    <br>
-    <% @current_cart.items.each do |f| %>
-        <%= image_tag(f.image_url, size: "300") %>
-        <br>
-        <%= link_to "Remove from Cart", cart_path(:id => f.id), method: :delete %>
-        <br>
-        <%= f.title %>
-        <br>
-        <%= f.description %>
-        <br>
-        <%= f.price %>$
-        <br>
-    <% end %>
+<body>
+    <!-- Search Wrapper Area Start -->
+    <div class="search-wrapper section-padding-100">
+        <div class="search-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-content">
+                        <form action="#" method="get">
+                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                            <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search Wrapper Area End -->
 
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
 
-<%= form_tag charges_path do %>
-  <article>
+        <div class="mobile-nav">
+            <!-- Navbar Brand -->
+            <div class="amado-navbar-brand">
+                <a href="/">KITTY</a>
+            </div>
+            <!-- Navbar Toggler -->
+            <div class="amado-navbar-toggler">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo">
+                <a href="/">KITTY</a>
+            </div>
+            <!-- Amado Nav -->
+        <% if user_signed_in? %>
+            <nav class="amado-nav">
+                <h3>Logged-in as: <%= current_user.username.capitalize %></h3>
+                <ul>
+                    <li><%= link_to "Edit Account", edit_user_registration_path %></li>
+                    <li><%= link_to "My Cart", cart_index_path %> (<%= current_user.cart.items.count %>)</li>
+                    <li><%= link_to "My Orders", order_index_path %></li>
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+                <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "btn amado-btn mb-15" %>
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                
+            </div>
+
+        <% elsif user_signed_in? && current_user.admin? %>
+            <h3>Logged-in as: <%= current_user.username.capitalize %></h3>
+            <nav class="amado-nav">
+                <ul>
+                    <li><%= link_to "Admin Page", admin_index_path %></li>
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+                <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "btn amado-btn mb-15" %>
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                
+            </div>
+                
+        <% else %>
+            <nav class="amado-nav">
+                <ul>
+                    
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+                <%= link_to "Log In", new_user_session_path, class: "btn amado-btn mb-15" %>
+                <%= link_to "Create Account", new_user_registration_path, class: "btn amado-btn mb-15" %>
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                
+            </div>
+        <%end%>
+
+
+        </header>
+        <!-- Header Area End -->
+
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="cart-title mt-50">
+                            <h2>Shopping Cart</h2>
+                        </div>
+
+                        <div class="cart-table clearfix">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if @current_cart.items.count == 0 %>
+                                        <tr>
+                                            Your Cart is empty.
+                                        </tr>
+                                    <%else%>
+                                        Number of items: <%= @current_cart.items.count %>
+                                        <tr>
+                                        <% @current_cart.items.each do |f| %>
+                                            <td class="cart_product_img">
+                                                 <%= image_tag(f.image_url, size: "300") %>
+                                            </td>
+                                            <td class="cart_product_desc">
+                                                <h5><%= f.title %></h5>
+                                            </td>
+                                            <td class="price">
+                                                <%= f.price %>$
+                                            </td>
+                                            <td class="qty">
+                                                <div class="qty-btn d-flex">
+                                                    
+                                                    <div class="quantity">
+                                                        <%= link_to "Remove from Cart", cart_path(:id => f.id), method: :delete %>                                                       
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                     <%end%>
+                                    
+                                <% end %>
+                                        
+                                        
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="cart-summary">
+                            <h5>Cart Total</h5>
+                            <ul class="summary-table">
+                                <li><span>total:</span><label class="amount">
+                                <span><%= @final_price %>$</span></label>
+                                <li><span>delivery:</span> <span>Free</span></li>
+                            </ul>
+    <%= form_tag charges_path do %>
     <% if flash[:error].present? %>
       <div id="error_explanation">
         <p><%= flash[:error] %></p>
       </div>
     <% end %>
-    <br>
-    <label class="amount">
-      <span>Total Price: <%= @final_price %>$</span>
-    </label>
-  </article>
-<br>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="Purchase <%= @current_cart.items.count %> 
-                                      <% if @current_cart.items.count > 1 %> Cats 
-                                      <% else %> Cat 
-                                      <% end %>
-                                      for <%= @final_price %>$"
-          data-amount="@final_price"
-          data-locale="auto"></script>
-<% end %>
-<% end %>
 
+                            <div class="cart-btn mt-100">
+                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                                        data-description="Purchase <%= @current_cart.items.count %> 
+                                          <% if @current_cart.items.count > 1 %> Cats 
+                                          <% else %> Cat 
+                                          <% end %>
+                                          for <%= @final_price %>$"
+                                        data-amount="@final_price"
+                                        data-locale="auto"></script><%end%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
 
+    <!-- ##### Newsletter Area Start ##### -->
+  
+    <!-- ##### Newsletter Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer_area clearfix">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Single Widget Area -->
+                <div class="col-12 col-lg-4">
+                    <div class="single_widget_area">
+                        <!-- Logo -->
+                        <div class="footer-logo mr-50">
+                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                        </div>
+                        <!-- Copywrite Text -->
+                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+                <!-- Single Widget Area -->
+                <div class="col-12 col-lg-8">
+                    <div class="single_widget_area">
+                        <!-- Footer Menu -->
+                        <div class="footer_menu">
+                            <nav class="navbar navbar-expand-lg justify-content-end">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+                                <div class="collapse navbar-collapse" id="footerNavContent">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="/">Home</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>

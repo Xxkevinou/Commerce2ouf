@@ -1,12 +1,120 @@
-<%= image_tag @cat_id.image_url, size: "500" %>
-<br>
-Name: <%= @cat_id.title %>
-<br>
-Description: <%= @cat_id.description %>
-<br>
-Price: <%= @cat_id.price %>$
-<br>
-<% if signed_in? %>
-<%= link_to "Add to Cart", cart_index_path(:cat_id => @cat_id.id), method: :create %>
-<% end %>
+
+
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div class="mobile-nav">
+            <!-- Navbar Brand -->
+            <div class="amado-navbar-brand">
+                <a href="/">KITTY</a>
+            </div>
+            <!-- Navbar Toggler -->
+            <div class="amado-navbar-toggler">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo">
+                <a href="/">KITTY</a>
+            </div>
+            <!-- Amado Nav -->
+        <% if user_signed_in? %>
+            <nav class="amado-nav">
+                <ul>
+                    <li><a href="/users/edit">Edit Account</a></li>
+                    <li><a href="#">My Cart</a></li>
+                    <li><a href="#">My Orders</a></li>
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+                <a href="/users/sign_out" class="btn amado-btn mb-15">Log Out</a>
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                
+            </div>
+        <% else %>
+            <nav class="amado-nav">
+                <ul>
+                    
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+                <a href="/users/sign_in" class="btn amado-btn mb-15">Log In</a>
+                <a href="/users/sign_up" class="btn amado-btn mb-15">Create Account</a>
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                
+            </div>
+        <%end%>
+
+
+        </header>
+        <!-- Header Area End -->
+         
+
+        <!-- Product Details Area Start -->
+        <div class="single-product-area section-padding-100 clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <div class="single_product_thumb">
+                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                <%= image_tag @cat_id.image_url, size: "500" %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p class="product-price"><%= @cat_id.price %>$</p>
+                                <h3><%= @cat_id.title %></h3>
+                                <p><%= @cat_id.description %></p>
+                                <!-- Ratings & Review -->
+                                        
+                                <!-- Avaiable -->
+
+                            <!-- Add to Cart Form -->
+                                <% if signed_in? %>
+                                    <%= link_to "Add to Cart", cart_index_path(:cat_id => @cat_id.id), method: :create, class: "btn amado-btn" %>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Details Area End -->
+    </div>
+
 

@@ -1,6 +1,6 @@
 class ChargesController < ApplicationController
 
-	def index  
+	def index 
 	end
 
 	def new
@@ -33,6 +33,14 @@ class ChargesController < ApplicationController
 	    :description => 'Rails Stripe customer',
 	    :currency    => 'usd'
 	  )
+
+	  puts '=============='
+	  puts
+	  puts
+	  puts 'coucou'
+	  puts
+	  puts
+	  puts '============='
 
 	rescue Stripe::CardError => e
 	  flash[:error] = e.message

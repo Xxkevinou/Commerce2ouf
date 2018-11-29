@@ -1,63 +1,114 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<!-- ##### Area Start ##### -->
+    <section class="newsletter-area section-padding-100-0">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Text -->
+                <div class="col-12 col-lg-6 col-xl-7">
+                    <div class="newsletter-text mb-100">
+                        <h2><span>Edit </span><%= resource_name.to_s.humanize %></h2>
+                        <br />
+                        <h2>We promise <span>never </span>to sell your info.</h2>
+                        <h2>Exept for money.</h2>
+                    </div>
+                </div>
+                <!-- Form -->
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                    <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+                    <div class="field"><br />
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-sm", :placeholder => "Email" %>
+                    </div>
+                    
+                    <div class="field"><br />
+                        <%= f.text_field :username, autofocus: true, class:"form-control form-control-sm", :placeholder => "Username" %>
+                    </div>                                                                                                          
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+                    <div class="field"><br />
+                        <%= f.text_field :address, autofocus: true, class:"form-control form-control-sm", :placeholder => "Address" %>
+                    </div>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true %>
-  </div>
+                    <div class="field"><br />
+                        <%= f.text_field :first_name, autofocus: true, class:"form-control form-control-sm", :placeholder => "First Name" %>
+                    </div>
 
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address, autofocus: true %>
-  </div>
+                    <div class="field"><br />
+                        <%= f.text_field :last_name, autofocus: true, class:"form-control form-control-sm", :placeholder => "Last Name"%>
+                    </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
+                    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                    <% end %>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
-  </div>
+                    <div class="field"><br />
+                      <%= f.password_field :password, autocomplete: "new-password", class:"form-control form-control-sm", :placeholder => "Password (#{@minimum_password_length} characters minimum)"%>
+                    </div>
+                    <p>(leave blank if you don't want to change it)</p>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+                    <div class="field">
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control form-control-sm", :placeholder => "Password confirmation" %>
+                    </div>
+                    <p>(leave blank if you don't want to change it)</p>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+                    <div class="field">
+                      <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control form-control-sm", :placeholder => "Current password"  %>
+                    </div>
+                    <p>(we need your current password to confirm your changes)</p>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+                    <div class="actions">
+                        <%= f.submit "Update", :class => "btn amado-btn mb-15" %><br /> 
+                        <p>Unhappy? <br /><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></p>
+                    </div>
+                    </div>
+                    <div class="actions"><br />
+                    <%= link_to "Back", :back, class:"btn btn-light"%>
+                    </div>
+                    <% end %>
+                    
+<!-- <%= render "devise/shared/links" %> -->
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+                <div class="col-12 col-lg-6 col-xl-5">
+                    <div class="newsletter-form mb-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Area End ##### -->
 
-<h3>Cancel my account</h3>
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer_area clearfix">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Single Widget Area -->
+                <div class="col-12 col-lg-4">
+                    <div class="single_widget_area">
+                        <!-- Copywrite Text -->
+                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+                <!-- Single Widget Area -->
+                <div class="col-12 col-lg-8">
+                    <div class="single_widget_area">
+                        <!-- Footer Menu -->
+                        <div class="footer_menu">
+                            <nav class="navbar navbar-expand-lg justify-content-end">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+                                <div class="collapse navbar-collapse" id="footerNavContent">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="/">Home</a>
+                                        </li>
+                                       
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->

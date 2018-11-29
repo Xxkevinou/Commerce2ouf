@@ -1,4 +1,5 @@
-<% if user_signed_in? && current_user.admin? %>
+<div class="short_overview my-5">
+<p><% if user_signed_in? && current_user.admin? %>
 Welcome to your admin page <%= current_user.username %>
 <br><br>
 You can add an item to your site: <%= link_to "HERE" %>.
@@ -44,4 +45,5 @@ Here are all the orders:
     <% end %>
 <% else %>
 <% controller.redirect_to home_index_path %>
-<% end %>
+<% end %></p>
+</div>
